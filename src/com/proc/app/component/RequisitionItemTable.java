@@ -146,6 +146,7 @@ public class RequisitionItemTable extends VerticalLayout {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				table.removeItem(id);
+				
 			}
 		});
 		
