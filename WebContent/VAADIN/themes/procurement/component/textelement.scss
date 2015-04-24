@@ -1,0 +1,9 @@
+@mixin textelement{
+
+	.textarea-resizeable{
+		resize:both !important;
+	}
+	&.v-app input.v-textfield.v-widget{
+		height:28px !important;
+	}
+}

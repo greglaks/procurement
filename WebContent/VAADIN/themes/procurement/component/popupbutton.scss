@@ -1,0 +1,18 @@
+@mixin popupbutton{
+	.v-popupbutton-popup-mypopupb {
+		left:443px !important;
+	}
+	.mypopupb {
+		border-left:none !important;
+		border-top-left-radius:0px !important;
+		border-bottom-left-radius:0px !important;
+		padding:5px 7px !important;
+	}
+
+	.mainbuttonpopup{
+		padding-right:10px !important;
+		border-top-right-radius:0px !important;
+		border-bottom-right-radius:0px !important;
+	}
+
+}

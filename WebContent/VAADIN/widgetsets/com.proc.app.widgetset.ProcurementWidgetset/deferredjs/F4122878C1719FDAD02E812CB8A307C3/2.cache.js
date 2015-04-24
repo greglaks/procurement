@@ -1,0 +1,1 @@
+$wnd.com_proc_app_widgetset_ProcurementWidgetset.runAsyncCallback2('oab(1521,1,tKd);_.tc=function H8b(){SWb((!LWb&&(LWb=new XWb),LWb),this.a.d)};ZDd(Qh)(2);\n//# sourceURL=com.proc.app.widgetset.ProcurementWidgetset-2.js\n')

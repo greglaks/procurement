@@ -1,0 +1,71 @@
+@mixin procurement-main{
+	.main-proc-page{
+		height:100% !important;
+		overflow:auto;
+		background:white;
+	}
+	.popupbutton-childern{
+		text-align:center;
+		padding:5px 0px;
+	}
+	.popupbutton-childern:hover{
+		cursor:pointer;
+		background: #4096ee; /* Old browsers */
+		background: -moz-linear-gradient(top,  #4096ee 0%, #4096ee 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4096ee), color-stop(100%,#4096ee)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #4096ee 0%,#4096ee 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #4096ee 0%,#4096ee 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #4096ee 0%,#4096ee 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  #4096ee 0%,#4096ee 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4096ee', endColorstr='#4096ee',GradientType=0 ); /* IE6-9 */
+		color:white;
+		@include border-radius(5px);
+		
+	}
+		
+	.procurement-mainpage-search {
+		border: 1px solid #d2d2d2;
+		width: auto !important;
+		@include border-radius(6px);
+		border-top:none;
+		border-top-right-radius:0px;
+		border-top-left-radius:0px;
+		position: relative;
+	}
+	
+	.v-caption-procurement-mainpage-search{
+		border-top-right-radius:6px;
+		border-top-left-radius:6px;
+		border: 1px solid #d2d2d2;
+		padding:5px;
+		padding-left:10px !important;
+		color: rgb(97, 97, 255);
+	}
+	
+	.procurement-mainpage-nav{
+		@include border-radius(6px);
+		padding:5px;
+		background-color:rgb(228, 228, 228) !important;
+	}
+	
+	.procurement-nav-standard{
+		font-size:12px;
+		padding:5px;
+		font-weight:bold;
+	}
+
+	.nav-link{
+		padding:5px;
+		color:rgb(97, 97, 255);
+		text-decoration:underline;
+	}
+	
+	.nav-link:hover{
+		cursor:pointer;	
+	}
+	
+	.procurement-detail-table .v-table-body{
+		overflow-y:auto !important;
+	}
+	
+}
