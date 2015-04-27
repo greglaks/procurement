@@ -7,13 +7,18 @@ import com.proc.dao.IDataImpl;
 import com.proc.page.MainPage;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.server.ErrorEvent;
+import com.vaadin.server.ErrorHandler;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
 @Theme("procurement")
@@ -29,6 +34,30 @@ public class ProcurementUI extends UI {
 	@Override
 	protected void init(VaadinRequest request) {
 		setContent(mainPage);
+		UI.getCurrent().setErrorHandler(new ErrorHandler() {
+	
+
+			@Override
+			public void error(com.vaadin.server.ErrorEvent event) {
+				Window w = new Window();
+				String cause = "";
+				CssLayout layout = new CssLayout();
+				for (Throwable t = event.getThrowable(); t != null;
+			             t = t.getCause())
+			            if (t.getCause() == null) // We're at final cause
+			                cause += t.getClass().getName() + "<br/>";
+			        
+			        // Display the error message in a custom fashion
+			        layout.addComponent(new Label(cause, ContentMode.HTML));
+			           
+			        // Do the default error handling (optional)
+				w.setContent(layout);
+				w.setDraggable(true);
+				w.setClosable(true);
+				w.center();
+				UI.getCurrent().addWindow(w);
+			}
+		});
 	}
 
 	public String getPriority(int priority) {

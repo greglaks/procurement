@@ -11,14 +11,15 @@
 	        <class>com.proc.bean.RequisitionItem</class>
 	        
      <properties>
+     
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/${OPENSHIFT_APP_NAME}" />
             <property name="javax.persistence.jdbc.user" value="adminHpVMpEF" />
             <property name="javax.persistence.jdbc.password" value="Wd-UAbz3aLWp" />
  
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
             <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
     </properties>	        
 	        
      <!--  
