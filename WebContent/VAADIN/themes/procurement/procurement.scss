@@ -27,7 +27,8 @@
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
 
-@import "../reindeer/reindeer.scss";
+//@import "../reindeer/reindeer.scss";
+@import "../valo/valo.scss";
 @import "component/popupbutton.scss";
 @import "component/button.scss";
 @import "component/textelement.scss";
@@ -36,7 +37,7 @@
 @import "view/procurement-main.scss";
 @import "view/procurement-copy.scss";
 @mixin procurement {
-  @include reindeer;
+  @include valo;
 
   @include procurement-main;
   @include popupbutton;

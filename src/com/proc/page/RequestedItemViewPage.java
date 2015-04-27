@@ -1,8 +1,16 @@
 package com.proc.page;
 
-import com.proc.app.component.ProcurementItemForm;
-import com.proc.app.component.ProcurementItemViewTable;
+import java.util.List;
+
+import com.proc.app.ProcurementUI;
+import com.proc.app.component.RequisitionForm;
+import com.proc.app.component.RequisitionItemViewTable;
 import com.proc.app.component.SearchItemComponent;
+import com.proc.bean.Requisition;
+import com.proc.bean.RequisitionItem;
+import com.proc.dao.IData;
+import com.proc.dao.IDataService;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 public class RequestedItemViewPage extends VerticalLayout {
@@ -11,18 +19,23 @@ public class RequestedItemViewPage extends VerticalLayout {
 	 * 
 	 */
 	private static final long serialVersionUID = 6940382825080619626L;
+	private Requisition requisition;
+	private List<RequisitionItem> requisitionItem;
 
-	public RequestedItemViewPage(){
+	public RequestedItemViewPage(Requisition requisition){
+		this.requisition = requisition;
+		this.requisitionItem = new IDataService().getRequisitionItem(requisition.getId());
 		initPage();
 	}
 
 	private void initPage() {
 		setSpacing(true);
-		ProcurementItemForm itemForm = new ProcurementItemForm(true);
+		RequisitionForm itemForm = new RequisitionForm(requisition, true);
 		SearchItemComponent searchComponent = new SearchItemComponent();
-		ProcurementItemViewTable itemTable = new ProcurementItemViewTable();
-		for(int i=0; i<15; i++){
-			itemTable.insertItem(String.valueOf(i), "Unit link"+i, "shortCode"+i, "description"+i, "rob"+i, String.valueOf((13+i)*2));
+		RequisitionItemViewTable itemTable = new RequisitionItemViewTable();
+		
+		for(RequisitionItem r: requisitionItem){
+			itemTable.insertItem(r);
 		}
 		
 		addComponent(itemForm);

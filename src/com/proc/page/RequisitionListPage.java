@@ -1,29 +1,31 @@
 package com.proc.page;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
+import com.proc.app.ProcurementUI;
 import com.proc.app.component.CustomPagedTable;
 import com.proc.app.component.SearchItemComponent;
+import com.proc.bean.Requisition;
+import com.proc.dao.IData;
+import com.proc.dao.IDataService;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.OptionGroup;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Button.ClickEvent;
 
-public class ProcurementListPage extends VerticalLayout {
+public class RequisitionListPage extends VerticalLayout {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4774251394314334294L;
-	private MainPage procurementMainPage;
+	private MainPage requisitionMainPage;
 
-	public ProcurementListPage(MainPage procurementMainPage){
-		this.procurementMainPage = procurementMainPage;
+	public RequisitionListPage(){
+		this.requisitionMainPage = ((ProcurementUI)UI.getCurrent()).getMainPage();
 		createListPage();
 	}
 
@@ -31,7 +33,6 @@ public class ProcurementListPage extends VerticalLayout {
 		setSpacing(true);
 		initSearchLayout();
 		initTableLayout();
-
 	}
 	private void initSearchLayout() {
 		SearchItemComponent mainSearchLayout = new SearchItemComponent();
@@ -41,14 +42,14 @@ public class ProcurementListPage extends VerticalLayout {
 	}
 
 	private void initTableLayout() {
-		CustomPagedTable table = new CustomPagedTable(procurementMainPage);
+		CustomPagedTable table = new CustomPagedTable();
 		HorizontalLayout bottomLayout = createBottomButtonControl();
 		table.addComponent(bottomLayout);
 		
 		addComponent(table);
-		for(int i=0;i<50;i++){
-			Date dateNow = Calendar.getInstance().getTime();
-			table.insertItem(String.valueOf(i), dateNow, "Prior "+i, "Vessel dept "+i, "Category "+i, "Vessel Link "+i, "Description "+i, "Vessel Ref no "+i);
+		List<Requisition> list = new IDataService().getAllRequisition();
+		for(Requisition r : list){
+			table.insertItem(r);
 		}
 		setComponentAlignment(table, Alignment.TOP_LEFT);
 	}
@@ -59,23 +60,17 @@ public class ProcurementListPage extends VerticalLayout {
 	        
 	        HorizontalLayout bottomGroupOneLayout = new HorizontalLayout();
 	        Button addButton = new Button("Add");
-	        Button addGridButton = new Button("Grid Add");
-	        Button gridEditButton = new Button("Grid Edit");
-	        Button supplyAddButton = new Button("Add supplies/REQUESTED ITEMS");
+	        addButton.setPrimaryStyleName("button-primary");
+	 
 	        bottomGroupOneLayout.addComponent(addButton);
-	        bottomGroupOneLayout.addComponent(addGridButton);
-	        bottomGroupOneLayout.addComponent(gridEditButton);
-	        
 	        bottomLayout.addComponent(bottomGroupOneLayout);
-	        bottomLayout.addComponent(supplyAddButton);
 
-	        
 	        addButton.addClickListener(new ClickListener() {
 				
 				@Override
 				public void buttonClick(ClickEvent event) {
-					procurementMainPage.switchPage(new AddItemPage());
-					procurementMainPage.setNavigationLink("Add");
+					requisitionMainPage.switchPage(new AddRequisitionItemPage(null));
+					requisitionMainPage.setNavigationLink("Add");
 				}
 			});
 	        return bottomLayout;

@@ -33,10 +33,9 @@ public class MainPage extends HorizontalLayout {
 	
 	private void initLeftLayout() {
 		VerticalLayout leftLayout = new VerticalLayout();
-		leftLayout.setWidth("200px");
+		leftLayout.setWidth("100px");
 		leftLayout.setHeight("100%");
 		addComponent(leftLayout);
-		setExpandRatio(leftLayout, 1.0f);
 	}
 
 	public void switchPage(Component switchComponent){
@@ -100,7 +99,7 @@ public class MainPage extends HorizontalLayout {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				switchPage(new ProcurementListPage(MainPage.this));
+				switchPage(new RequisitionListPage());
 			}
 			
 		});

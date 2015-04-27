@@ -3,8 +3,9 @@ package com.proc.app.component;
 import java.util.Date;
 
 import com.proc.app.Util;
+import com.proc.bean.RequisitionItem;
 import com.proc.page.MainPage;
-import com.proc.page.ProcurementMasterDetail;
+import com.proc.page.RequisitionMasterDetail;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.server.ThemeResource;
@@ -18,7 +19,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 
-public class ProcurementItemViewTable extends VerticalLayout {
+public class RequisitionItemViewTable extends VerticalLayout {
 
 	/**
 	 * 
@@ -39,8 +40,8 @@ public class ProcurementItemViewTable extends VerticalLayout {
 	private PagedTable table = new PagedTable();
 
 	
-	public ProcurementItemViewTable(){
-
+	public RequisitionItemViewTable(){
+		setSpacing(true);
 		initTable();
 	}
 	
@@ -56,7 +57,7 @@ public class ProcurementItemViewTable extends VerticalLayout {
         container.addContainerProperty(SHORT_CODE, String.class, null);
         container.addContainerProperty(DESCRIPTION, String.class, null);
         container.addContainerProperty(ROB, String.class, null);
-        container.addContainerProperty(QUANTITY, String.class, null);
+        container.addContainerProperty(QUANTITY, Integer.class, null);
 
         table.setColumnHeader(COL_UTIL_1, " ");
         table.setColumnHeader(COL_UTIL_2, " ");
@@ -98,18 +99,18 @@ public class ProcurementItemViewTable extends VerticalLayout {
 		return mainLayout;
 	}
 
-	public void insertItem(String id, String unitLink, String shortCode, String description, String rob, String quantity){
-		Item item = container.addItem(id);
+	public void insertItem(RequisitionItem reqItem){
+		Item item = container.addItem(reqItem);
 
 		item.getItemProperty(COL_UTIL_1).setValue(new CheckBox());
 		item.getItemProperty(COL_UTIL_2).setValue(new Button(new ThemeResource(Util.EDIT_ICON)));
 		item.getItemProperty(COL_UTIL_3).setValue(new Button(new ThemeResource(Util.CREATE_ICON)));
 		item.getItemProperty(COL_UTIL_4).setValue(new Button(new ThemeResource(Util.DELETE_ICON)));
-		item.getItemProperty(UNIT_LINK).setValue(unitLink);
-		item.getItemProperty(SHORT_CODE).setValue(shortCode);
-		item.getItemProperty(DESCRIPTION).setValue(description);
-		item.getItemProperty(ROB).setValue(rob);
-		item.getItemProperty(QUANTITY).setValue(quantity);
+		item.getItemProperty(UNIT_LINK).setValue(reqItem.getUnitLink());
+		item.getItemProperty(SHORT_CODE).setValue(reqItem.getShortCode());
+		item.getItemProperty(DESCRIPTION).setValue(reqItem.getDescription());
+		item.getItemProperty(ROB).setValue(reqItem.getRob());
+		item.getItemProperty(QUANTITY).setValue(reqItem.getQuantity());
 		
 	}
 

@@ -55,7 +55,7 @@ public class LoginPage extends VerticalLayout {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
-				mainPage.switchPage(new ProcurementListPage(mainPage));
+				mainPage.switchPage(new RequisitionListPage());
 			}
 		});
 		

@@ -1,5 +1,6 @@
 package com.proc.app.component;
 
+import com.proc.bean.RequisitionItem;
 import com.proc.dao.Data;
 import com.proc.dao.IDataImpl;
 import com.vaadin.data.Item;
@@ -21,12 +22,12 @@ public class RequisitionItemTable extends VerticalLayout {
 	 * 
 	 */
 	private static final long serialVersionUID = 6105863126227001375L;
-	private static final String DELETE_COMPONENT = "delete-item";
-	private static final String UNIT_LINK = "unit-link";
-	private static final String SHORT_CODE = "short-code";
-	private static final String ROB = "rob";
-	private static final String DESCRIPTION = "description";
-	private static final String QUANTITY = "quantity";
+	public static final String DELETE_COMPONENT = "delete-item";
+	public static final String UNIT_LINK = "unit-link";
+	public static final String SHORT_CODE = "short-code";
+	public static final String ROB = "rob";
+	public static final String DESCRIPTION = "description";
+	public static final String QUANTITY = "quantity";
 	private IndexedContainer container;
 	private Table table = new Table();
 	private boolean isReadOnly;
@@ -34,6 +35,7 @@ public class RequisitionItemTable extends VerticalLayout {
 	
 	public RequisitionItemTable(boolean isReadOnly){
 		this.isReadOnly = isReadOnly;
+		setSpacing(true);
 		initTable();
 		initFooterButton();
 	}
@@ -51,8 +53,7 @@ public class RequisitionItemTable extends VerticalLayout {
 
 			@Override
 			public void buttonClick(ClickEvent event) {	
-				int latestId = table.getItemIds().size() + 1;
-				insertItem(latestId);
+				insertItem(new RequisitionItem());
 			}
 			
 		});
@@ -60,13 +61,14 @@ public class RequisitionItemTable extends VerticalLayout {
 	}
 
 	private void initTable() {
-		table.setHeight("200px");
+		table.setHeight("350px");
+		table.setWidth("800px");
 		table.addStyleName("procurement-detail-table");
 		container = new IndexedContainer();
 		container.addContainerProperty(DELETE_COMPONENT, Button.class, null);
-		container.addContainerProperty(UNIT_LINK, ComboBox.class, null);
 		container.addContainerProperty(SHORT_CODE, TextField.class, null);
 		container.addContainerProperty(DESCRIPTION, TextArea.class, null);
+		container.addContainerProperty(UNIT_LINK, ComboBox.class, null);
 		container.addContainerProperty(ROB, TextField.class, null);
 		container.addContainerProperty(QUANTITY, TextField.class, null);
 		table.setContainerDataSource(container);
@@ -80,14 +82,20 @@ public class RequisitionItemTable extends VerticalLayout {
 		addComponent(table);
 	}
 	
-	public void insertItem(final Object id){
-		Item item = table.addItem(id);
+	public void insertItem(final RequisitionItem reqItem){
+		Item item = table.addItem(reqItem);
 		ComboBox unitLink = createUnitLinkComboBox();
 		TextField shortCode = new TextField();
 		TextArea description = new TextArea();
 		TextField rob = new TextField();
 		TextField quantity = new TextField();
 		Button deleteButton = new Button("Delete");
+		
+		unitLink.select(reqItem.getUnitLink());
+		shortCode.setValue(reqItem.getShortCode());
+		description.setValue(reqItem.getDescription());
+		rob.setValue(reqItem.getRob());
+		quantity.setValue(String.valueOf(reqItem.getQuantity()));
 		
 		unitLink.setWidth("90px");
 		shortCode.setWidth("90px");
@@ -127,8 +135,8 @@ public class RequisitionItemTable extends VerticalLayout {
 				String value = textField.getValue();				
 				Data data = new IDataImpl().getData(value);
 				
-				ComboBox unitLinkComboBox = (ComboBox) container.getContainerProperty(id, UNIT_LINK).getValue();
-				TextArea descriptionTextField = (TextArea) container.getContainerProperty(id, DESCRIPTION).getValue();
+				ComboBox unitLinkComboBox = (ComboBox) container.getContainerProperty(reqItem, UNIT_LINK).getValue();
+				TextArea descriptionTextField = (TextArea) container.getContainerProperty(reqItem, DESCRIPTION).getValue();
 				
 				if(data != null){
 					descriptionTextField.setValue(data.getDescription());
@@ -145,7 +153,7 @@ public class RequisitionItemTable extends VerticalLayout {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
-				table.removeItem(id);
+				table.removeItem(reqItem);
 				
 			}
 		});
@@ -168,5 +176,10 @@ public class RequisitionItemTable extends VerticalLayout {
 		}
 		return cb;
 	}
+
+	public Table getTable() {
+		return table;
+	}
+
 
 }
