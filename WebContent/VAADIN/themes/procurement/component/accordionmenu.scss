@@ -1,0 +1,19 @@
+@mixin accordionmenu{
+
+	.left-menu .v-accordion-item-content {
+		background-color: #fafafa;
+	}
+
+	.left-menu.v-accordion {
+		padding:10px 0px !important;
+	}
+
+	.menu-childern {
+		background: #EDEDED;
+		padding: 5px 10px 5px 30px;
+		width: 100% !important;
+	}
+	.menu-childern:hover{
+		cursor:pointer;
+	}
+}

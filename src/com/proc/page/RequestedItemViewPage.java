@@ -10,10 +10,12 @@ import com.proc.bean.Requisition;
 import com.proc.bean.RequisitionItem;
 import com.proc.dao.IData;
 import com.proc.dao.IDataService;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-public class RequestedItemViewPage extends VerticalLayout {
+public class RequestedItemViewPage extends VerticalLayout implements View{
 
 	/**
 	 * 
@@ -22,10 +24,8 @@ public class RequestedItemViewPage extends VerticalLayout {
 	private Requisition requisition;
 	private List<RequisitionItem> requisitionItem;
 
-	public RequestedItemViewPage(Requisition requisition){
-		this.requisition = requisition;
-		this.requisitionItem = new IDataService().getRequisitionItem(requisition.getId());
-		initPage();
+	public RequestedItemViewPage(){
+		
 	}
 
 	private void initPage() {
@@ -41,5 +41,16 @@ public class RequestedItemViewPage extends VerticalLayout {
 		addComponent(itemForm);
 		addComponent(searchComponent);
 		addComponent(itemTable);
+	}
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		String param = event.getParameters();
+		Long id = Long.parseLong(param);
+		IDataService dataService = new IDataService();
+		
+		this.requisition = dataService.getRequisitionById(id);
+		this.requisitionItem = dataService.getRequistionItem(id);
+		initPage();
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import com.proc.app.ProcurementUI;
 import com.proc.app.Util;
 import com.proc.app.component.PagedTable.PagedTableChangeEvent;
+import com.proc.app.navigation.NavigationItem;
 import com.proc.bean.Requisition;
 import com.proc.dao.IData;
 import com.proc.dao.IDataService;
@@ -97,21 +98,23 @@ public class CustomPagedTable extends VerticalLayout {
 		Button copy = new Button("Master/Detail Copy");
 		Button edit = new Button("Master/Detail Edit");
 		Button main = new Button("REQUESTED ITEMS(0)");
+		
 		main.addClickListener(new ClickListener() {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
 				
-				procurementMainPage.switchPage(new RequestedItemViewPage(requisition));
-				procurementMainPage.setNavigationLink("REQUESTED ITEM");
+				UI.getCurrent().getNavigator().navigateTo(NavigationItem.REQUISITION_VIEW_PAGE+"/"+requisition.getId());
 			}
 		});
 		view.addClickListener(new ClickListener() {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
-				//procurementMainPage.removeAllComponents();
-				//procurementMainPage.addComponent(new );
+				Requisition r = new IDataService().copyRequisition(requisition);
+				if(r != null){
+					UI.getCurrent().getNavigator().navigateTo(NavigationItem.REQUISITION_VIEW_PAGE+"/"+requisition.getId());					
+				}
 				
 			}
 		});
@@ -121,9 +124,9 @@ public class CustomPagedTable extends VerticalLayout {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				Requisition r = new IDataService().copyRequisition(requisition);
-				procurementMainPage.switchPage(new RequisitionMasterDetail(r, false));
-				procurementMainPage.setNavigationLink("Copy");
-				
+				if(r != null){
+					UI.getCurrent().getNavigator().navigateTo(NavigationItem.REQUISITION_COPY_PAGE+"/"+requisition.getId());					
+				}
 			}
 		});
 		
@@ -131,8 +134,9 @@ public class CustomPagedTable extends VerticalLayout {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
-				procurementMainPage.switchPage(new RequisitionMasterDetail(requisition, false));
-				procurementMainPage.setNavigationLink("Update");
+				if(requisition != null){
+					UI.getCurrent().getNavigator().navigateTo(NavigationItem.REQUISITION_EDIT_PAGE+"/"+requisition.getId());					
+				}
 			}
 		});
 		

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.proc.app.ProcurementUI;
 import com.proc.app.component.RequisitionForm;
+import com.proc.app.navigation.NavigationItem;
 import com.proc.bean.Requisition;
 import com.proc.dao.IDataService;
 import com.vaadin.ui.Button;
@@ -36,10 +37,11 @@ public class AddRequisitionItemPage extends VerticalLayout {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				Map<String, Object> map = form.getRequisitionFormValue();
-				new IDataService().saveNewRequisition(map,null);
-				MainPage main = ((ProcurementUI)UI.getCurrent()).getMainPage();
-				Notification.show("Requisition is sucessfully created", Type.HUMANIZED_MESSAGE);
-				main.switchPage(new RequisitionListPage());
+				Requisition r = new IDataService().saveNewRequisition(map,null);
+				if(r != null){					
+					Notification.show("Requisition is sucessfully created", Type.HUMANIZED_MESSAGE);
+					UI.getCurrent().getNavigator().navigateTo(NavigationItem.REQUISITION_SUPPLY_PAGE);
+				}
 				
 			}
 		});

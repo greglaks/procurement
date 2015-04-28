@@ -5,9 +5,13 @@ import java.util.List;
 import com.proc.app.ProcurementUI;
 import com.proc.app.component.CustomPagedTable;
 import com.proc.app.component.SearchItemComponent;
+import com.proc.app.navigation.NavigationItem;
 import com.proc.bean.Requisition;
 import com.proc.dao.IData;
 import com.proc.dao.IDataService;
+import com.vaadin.navigator.Navigator;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -16,7 +20,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-public class RequisitionListPage extends VerticalLayout {
+public class RequisitionListPage extends VerticalLayout implements View{
 	
 	/**
 	 * 
@@ -69,11 +73,16 @@ public class RequisitionListPage extends VerticalLayout {
 				
 				@Override
 				public void buttonClick(ClickEvent event) {
-					requisitionMainPage.switchPage(new AddRequisitionItemPage(null));
-					requisitionMainPage.setNavigationLink("Add");
+					Navigator nav = UI.getCurrent().getNavigator();
+					nav.navigateTo(NavigationItem.REQUISITION_ADD_PAGE);
 				}
 			});
 	        return bottomLayout;
+	}
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		
 	}
 	
 }

@@ -33,6 +33,7 @@
 @import "component/button.scss";
 @import "component/textelement.scss";
 @import "component/table.scss";
+@import "component/accordionmenu.scss";
 @import "mixins.scss";
 @import "view/procurement-main.scss";
 @import "view/procurement-copy.scss";
@@ -45,6 +46,7 @@
   @include button;
   @include table;
   @include textelement;
+  @include accordionmenu;
   
   :focus {outline:none;}
 	&.v-app, &.v-app-loading{

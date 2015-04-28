@@ -60,7 +60,7 @@ public class IDataService {
 				
 		return r;
 	}
-	public void saveUpdateRequisition(Long id, Map<String, Object> map,
+	public Requisition saveUpdateRequisition(Long id, Map<String, Object> map,
 			Table table) {
 		IData data = new IDataImpl();
 		Requisition r = null;
@@ -92,22 +92,24 @@ public class IDataService {
 				requsitionItem.setUnitLink(unitLink);			
 				data.createRequisitionItem(requsitionItem);
 			}	
+			return r;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 		
 	}
 
 
-	public List<RequisitionItem> getRequisitionItem(Long id) {
+	public Requisition getRequisitionById(Long id) {
 		IData data = new IDataImpl();
-		List<RequisitionItem> items = null;
+		Requisition r = null;
 		try {
-			items = data.getRequistionItem(id);
+			r = data.getSingleRequisition(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return items;
+		return r;
 	}
 
 	public List<Requisition> getAllRequisition() {

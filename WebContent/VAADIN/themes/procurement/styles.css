@@ -12591,6 +12591,24 @@ div.v-layout.v-horizontal.v-widget {
 	height: 37px !important;
 }
 
+.procurement .left-menu .v-accordion-item-content {
+	background-color: #fafafa;
+}
+
+.procurement .left-menu.v-accordion {
+	padding: 10px 0px !important;
+}
+
+.procurement .menu-childern {
+	background: #EDEDED;
+	padding: 5px 10px 5px 30px;
+	width: 100% !important;
+}
+
+.procurement .menu-childern:hover {
+	cursor: pointer;
+}
+
 .procurement :focus {
 	outline: none;
 }
