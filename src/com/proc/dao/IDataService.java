@@ -9,18 +9,21 @@ import java.util.Map;
 import com.proc.app.ProcurementUI;
 import com.proc.app.component.RequisitionForm;
 import com.proc.app.component.RequisitionItemTable;
+import com.proc.app.navigation.NavigationItem;
 import com.proc.bean.Requisition;
 import com.proc.bean.RequisitionItem;
 import com.vaadin.data.Container;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.Notification.Type;
 
 public class IDataService {
 
-	public Requisition saveNewRequisition(Map<String, Object> map,
+	public void saveNewRequisition(Map<String, Object> map,
 			Table table) {
 		Requisition r  = new Requisition();
 		try{
@@ -54,13 +57,15 @@ public class IDataService {
 				}				
 			}
 			
+			Notification.show("Requisition is sucessfully created", Type.HUMANIZED_MESSAGE);
+			UI.getCurrent().getNavigator().navigateTo(NavigationItem.REQUISITION_SUPPLY_PAGE);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 				
-		return r;
+		
 	}
-	public Requisition saveUpdateRequisition(Long id, Map<String, Object> map,
+	public void saveUpdateRequisition(Long id, Map<String, Object> map,
 			Table table) {
 		IData data = new IDataImpl();
 		Requisition r = null;
@@ -92,11 +97,14 @@ public class IDataService {
 				requsitionItem.setUnitLink(unitLink);			
 				data.createRequisitionItem(requsitionItem);
 			}	
-			return r;
+			
+			Notification.show("Requisition is sucessfully updated", Type.HUMANIZED_MESSAGE);					
+			UI.getCurrent().getNavigator().navigateTo(NavigationItem.REQUISITION_SUPPLY_PAGE);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		
 		
 	}
 

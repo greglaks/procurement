@@ -29,11 +29,7 @@ public class RequisitionUpdatePage extends RequisitionMasterDetail implements Vi
 			@Override
 			public void buttonClick(ClickEvent event) {
 				Map<String, Object> map = requisitionForm.getRequisitionFormValue();
-				Requisition r =new IDataService().saveUpdateRequisition(requisition.getId(),map, table.getTable());
-				if(r != null){
-					Notification.show("Requisition is sucessfully updated", Type.HUMANIZED_MESSAGE);					
-					UI.getCurrent().getNavigator().navigateTo(NavigationItem.REQUISITION_SUPPLY_PAGE);
-				}
+				new IDataService().saveUpdateRequisition(requisition.getId(),map, table.getTable());
 			}
 		});
 		

@@ -7,6 +7,8 @@ import com.proc.app.component.RequisitionForm;
 import com.proc.app.navigation.NavigationItem;
 import com.proc.bean.Requisition;
 import com.proc.dao.IDataService;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
@@ -15,7 +17,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification.Type;
 
-public class AddRequisitionItemPage extends VerticalLayout {
+public class AddRequisitionItemPage extends VerticalLayout implements View{
 
 	/**
 	 * 
@@ -23,9 +25,8 @@ public class AddRequisitionItemPage extends VerticalLayout {
 	private static final long serialVersionUID = 4048180009986615034L;
 	private Requisition requisitionItem;
 
-	public AddRequisitionItemPage(Requisition requisitionItem){
-		this.requisitionItem = requisitionItem;
-		createPage();
+	public AddRequisitionItemPage(){
+		
 	}
 
 	private void createPage() {
@@ -37,16 +38,18 @@ public class AddRequisitionItemPage extends VerticalLayout {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				Map<String, Object> map = form.getRequisitionFormValue();
-				Requisition r = new IDataService().saveNewRequisition(map,null);
-				if(r != null){					
-					Notification.show("Requisition is sucessfully created", Type.HUMANIZED_MESSAGE);
-					UI.getCurrent().getNavigator().navigateTo(NavigationItem.REQUISITION_SUPPLY_PAGE);
-				}
+				new IDataService().saveNewRequisition(map,null);
+
 				
 			}
 		});
 		addButton.setPrimaryStyleName("button-primary");
 		addComponent(form);
 		addComponent(addButton);
+	}
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		createPage();
 	}
 }

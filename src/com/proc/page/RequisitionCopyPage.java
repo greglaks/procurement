@@ -29,12 +29,7 @@ public class RequisitionCopyPage extends RequisitionMasterDetail implements View
 			@Override
 			public void buttonClick(ClickEvent event) {
 				Map<String, Object> map = requisitionForm.getRequisitionFormValue();
-				Requisition r = new IDataService().saveNewRequisition(map, table.getTable());
-				if(r != null){
-					Notification.show("Requisition is sucessfully copied", Type.HUMANIZED_MESSAGE);					
-					UI.getCurrent().getNavigator().navigateTo(NavigationItem.REQUISITION_SUPPLY_PAGE);
-				}
-				
+				new IDataService().saveNewRequisition(map, table.getTable());
 			}
 		});
 		

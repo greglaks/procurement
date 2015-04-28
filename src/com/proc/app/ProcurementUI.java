@@ -9,6 +9,7 @@ import com.proc.app.navigation.NavigationManager;
 import com.proc.app.navigation.NavigatorWrapper;
 import com.proc.dao.IData;
 import com.proc.dao.IDataImpl;
+import com.proc.page.AddRequisitionItemPage;
 import com.proc.page.LoginPage;
 import com.proc.page.MainPage;
 import com.proc.page.RequestedItemViewPage;
@@ -62,9 +63,26 @@ public class ProcurementUI extends UI {
 		n.addView(getRequisitionViewNavItem(navigationManager));
 		n.addView(getRequisitionEditNavItem(navigationManager));
 		n.addView(getRequisitionCopyNavItem(navigationManager));
+		n.addView(getRequisitionAddNavItem(navigationManager));
 		
 	}
 	
+	private NavigationItem getRequisitionAddNavItem(
+			NavigationManager navigationManager) {
+		NavigationItem loginPageNavItem  = new NavigationItem();
+		
+		loginPageNavItem.setNavigationCaption("Add");
+		loginPageNavItem.setNavigationId(NavigationItem.REQUISITION_ADD_PAGE);
+		loginPageNavItem.setNavigationClass(AddRequisitionItemPage.class);
+		
+		Stack<Button> s  = new Stack<Button>();
+		s.add(navigationManager.getHome());
+		s.add(navigationManager.getRequisitionSupplyButton());
+		loginPageNavItem.setButtonNavigations(s);
+		
+		return loginPageNavItem;
+	}
+
 	private NavigationItem getRequisitionCopyNavItem(
 			NavigationManager navigationManager) {
 		NavigationItem loginPageNavItem  = new NavigationItem();

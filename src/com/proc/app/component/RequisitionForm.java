@@ -45,6 +45,7 @@ public class RequisitionForm extends HorizontalLayout {
 	private ComboBox categoryLink;
 	private TextField description;
 	private TextArea remarks;
+	private FormLayout form1;
 
 	public RequisitionForm(Requisition requisition, boolean isReadOnly){
 		this.isReadOnly = isReadOnly;
@@ -111,7 +112,7 @@ public class RequisitionForm extends HorizontalLayout {
 	}
 
 	private FormLayout createForm1() {
-		FormLayout form = new FormLayout();
+		form1 = new FormLayout();
 		priority = new ComboBox("Priority");
 		dateField = new DateField("Date");
 		categoryLink = new ComboBox("Category Link");
@@ -132,15 +133,18 @@ public class RequisitionForm extends HorizontalLayout {
 		remarks.setColumns(23);
 		categoryLink.setRequired(true);
 		
-		form.addComponent(priority);
-		form.addComponent(dateField);
-		form.addComponent(categoryLink);
-		form.addComponent(description);
-		form.addComponent(remarks);
+		priority.setRequired(true);
+		dateField.setRequired(true);
+		
+		form1.addComponent(priority);
+		form1.addComponent(dateField);
+		form1.addComponent(categoryLink);
+		form1.addComponent(description);
+		form1.addComponent(remarks);
 
 		
 		
-		return form;
+		return form1;
 		
 	}
 
@@ -181,7 +185,16 @@ public class RequisitionForm extends HorizontalLayout {
 		return m;
 	}
 	
+	 
 	
+	public FormLayout getForm1() {
+		return form1;
+	}
+
+	public void setForm1(FormLayout form1) {
+		this.form1 = form1;
+	}
+
 	public Requisition getRequisition() {
 		return requisition;
 	}

@@ -107,7 +107,7 @@ public class IDataImpl implements IData {
 		EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
 		em.getTransaction().begin();
 		Requisition r  = em.find(Requisition.class, requisition.getId());
-		em.merge(r);
+		em.merge(requisition);
 		em.getTransaction().commit();
 		em.close();
 	}
@@ -125,9 +125,11 @@ public class IDataImpl implements IData {
 
 
 	@Override
-	public List<RequisitionItem> getRequistionItem(long requisionItem) throws Exception{
+	public List<RequisitionItem> getRequistionItem(long requisionId) throws Exception{
+		Requisition requisition = getSingleRequisition(requisionId);
 		EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-		Query q = em.createQuery("SELECT i FROM RequisitionItem i");
+		Query q = em.createQuery("SELECT i FROM RequisitionItem i WHERE i.requisition = :requisition");
+		q.setParameter("requisition", requisition);
 		List<RequisitionItem> items = q.getResultList();
 		em.close();
 		
