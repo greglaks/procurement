@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gwt.user.client.ui.HTML;
 import com.proc.bean.Requisition;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
@@ -155,6 +156,7 @@ public class RequisitionForm extends HorizontalLayout {
 		priority.setItemCaption(1, "Urgent");
 		priority.setItemCaption(2, "Normal");
 		priority.setItemCaption(3, "Low");
+		
 	}
 
 	private void insertCatecoryLinkItems(ComboBox categoryLink) {

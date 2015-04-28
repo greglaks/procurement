@@ -53,7 +53,14 @@ public class RequisitionItemTable extends VerticalLayout {
 
 			@Override
 			public void buttonClick(ClickEvent event) {	
-				insertItem(new RequisitionItem());
+				RequisitionItem item = new RequisitionItem();
+				item.setDescription("");
+				item.setQuantity(0);
+				item.setRob("");
+				item.setShortCode("");
+				item.setUnitLink("");
+				
+				insertItem(item);
 			}
 			
 		});
